@@ -34,13 +34,11 @@ const updateEvent = async (req, res = response) => {
     const event = await Event.findById(eventId);
 
     if (!event) {
-      res.status(404).json({
+      return res.status(404).json({
         ok: false,
         msg: "Event not found",
       });
     }
-
-    console.log(event.user);
 
     if (event.user.toString !== uid) {
       return res.status(401).json({
@@ -72,6 +70,39 @@ const updateEvent = async (req, res = response) => {
 };
 
 const deleteEvent = async (req, res = response) => {
+  const eventId = req.params.id;
+  const uid = req.uid;
+  try {
+    const event = await Event.findById(eventId);
+    if (!event) {
+      return res.status(404).json({
+        ok: false,
+        msg: "Event not found",
+      });
+    }
+
+    // if (event.user.toString !== uid) {
+    //   return res.status(401).json({
+    //     ok: false,
+    //     msg: "You have no privileges",
+    //   });
+    // }
+    const id = req.params.id;
+    await Event.findByIdAndDelete(id);
+
+    if (event) {
+      res.json({
+        ok: true,
+        msg: "Event deleted successfully",
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    res.json({
+      ok: false,
+      msg: "check the logs server",
+    });
+  }
   res.json({
     ok: true,
     msg: "delete",
