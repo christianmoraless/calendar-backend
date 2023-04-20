@@ -4,7 +4,7 @@ const dbConnection = async () => {
   try {
     mongoose
       .connect(
-        "mongodb://christianmorales:yOzVDBfx28XAL9Av@ac-ufc2ltz-shard-00-00.etzwvhz.mongodb.net:27017,ac-ufc2ltz-shard-00-01.etzwvhz.mongodb.net:27017,ac-ufc2ltz-shard-00-02.etzwvhz.mongodb.net:27017/?ssl=true&replicaSet=atlas-y1cdn1-shard-0&authSource=admin&retryWrites=true&w=majority",
+        "mongodb://christian:VQPVQMTgFJcitnOY@ac-xhcugzk-shard-00-00.uwxnkje.mongodb.net:27017,ac-xhcugzk-shard-00-01.uwxnkje.mongodb.net:27017,ac-xhcugzk-shard-00-02.uwxnkje.mongodb.net:27017/?ssl=true&replicaSet=atlas-12bwxb-shard-0&authSource=admin&retryWrites=true&w=majority",
         {
           useNewUrlParser: true,
           useUnifiedTopology: true,
