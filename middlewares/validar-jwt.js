@@ -10,7 +10,6 @@ const validarJWT = (req, res = response, next) => {
       msg: "Token no valid 1",
     });
   }
-  console.log(token);
   try {
     const { uid, name } = jwt.verify(token, process.env.SECRET_JWT_SEED);
     req.uid = uid;
