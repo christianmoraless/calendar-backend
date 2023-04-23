@@ -11,16 +11,17 @@ const getEvents = async (req, res = response) => {
 
 const createEvents = async (req, res = response) => {
   const event = new Event(req.body);
+  console.log(req.body);
   try {
     event.user = req.uid;
     const eventSaved = await event.save();
-    res.json({
+    return res.json({
       ok: true,
       event: eventSaved,
     });
   } catch (error) {
     console.log(error);
-    res.json({
+    return res.json({
       ok: true,
       msg: "Check the server logs",
     });
@@ -40,12 +41,12 @@ const updateEvent = async (req, res = response) => {
       });
     }
 
-    if (event.user.toString !== uid) {
-      return res.status(401).json({
-        ok: false,
-        msg: "You have no privileges",
-      });
-    }
+    // if (event.user.toString !== uid) {
+    //   return res.status(401).json({
+    //     ok: false,
+    //     msg: "You have no privileges",
+    //   });
+    // }
 
     const newEvent = {
       ...req.body,
@@ -56,7 +57,7 @@ const updateEvent = async (req, res = response) => {
       new: true,
     });
 
-    res.json({
+    return res.json({
       ok: true,
       event: eventUpdated,
     });
@@ -91,19 +92,19 @@ const deleteEvent = async (req, res = response) => {
     await Event.findByIdAndDelete(id);
 
     if (event) {
-      res.json({
+      return res.json({
         ok: true,
         msg: "Event deleted successfully",
       });
     }
   } catch (error) {
     console.log(error);
-    res.json({
+    return res.json({
       ok: false,
       msg: "check the logs server",
     });
   }
-  res.json({
+  return res.json({
     ok: true,
     msg: "delete",
   });

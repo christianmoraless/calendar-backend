@@ -25,8 +25,7 @@ const EnventSchema = Schema({
 });
 
 EnventSchema.method("toJSON", function () {
-  const { _id, __v, ...object } = this.toObject();
-  Object.id = _id;
+  const { __v, ...object } = this.toObject();
   return object;
 });
 
